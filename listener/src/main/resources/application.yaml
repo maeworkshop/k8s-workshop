@@ -1,0 +1,42 @@
+spring:
+  profiles:
+    active: dev
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          auto-add-partitions: true
+        bindings:
+          sensorDataProducer-out-0:
+            producer:
+              configuration:
+                value.serializer: ${app.messaging.serializer}
+                schema.registry.url: ${app.messaging.scheme-registry-url}
+          sensorDataConsumer-in-0:
+            consumer:
+              configuration:
+                value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+                schema.registry.url: http://localhost:8081
+                specific.avro.reader: true
+
+      bindings:
+        sensorDataProducer-out-0:
+          destination: ${app.messaging.topics.SENSOR_DATA.topic-name}
+          producer:
+            partition-key-expression: headers['${app.messaging.topics.SENSOR_DATA.partition-key}']
+            partition-count: 8
+            use-native-encoding: true
+        sensorDataConsumer-in-0:
+          destination: ${app.messaging.topics.SENSOR_DATA.topic-name}
+          group: group
+
+app:
+  messaging:
+    serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    scheme-registry-url: http://localhost:8081
+    topics:
+      SENSOR_DATA:
+        output-binding-name: sensorDataProducer-out-0
+        topic-name: sensor-data
+        partition-key: deviceId

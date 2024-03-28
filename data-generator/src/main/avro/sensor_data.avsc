@@ -1,0 +1,63 @@
+{
+  "namespace": "com.maemresen.data.generator",
+  "type": "record",
+  "name": "SensorData",
+  "fields": [
+    {
+      "name": "device",
+      "type": {
+        "type": "record",
+        "name": "Device",
+        "fields": [
+          {
+            "name": "deviceId",
+            "type": "string",
+            "doc": "Unique identifier for the IoT device."
+          },
+          {
+            "name": "location",
+            "type": "string",
+            "doc": "Location of the device, if relevant."
+          }
+        ]
+      }
+    },
+    {
+      "name": "sensor",
+      "type": {
+        "type": "record",
+        "name": "Sensor",
+        "fields": [
+          {
+            "name": "sensorId",
+            "type": "string",
+            "doc": "Unique identifier for the sensor in the IoT device."
+          },
+          {
+            "name": "type",
+            "type": {
+              "type": "enum",
+              "name": "SensorType",
+              "symbols": [
+                "HUMIDITY",
+                "TEMP"
+              ],
+              "doc": "Type of the sensor from device, such as temperature or humidity."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "timestamp",
+      "type": "long",
+      "logicalType": "timestamp-millis",
+      "doc": "Timestamp when the data was recorded, in milliseconds since epoch."
+    },
+    {
+      "name": "value",
+      "type": "double",
+      "doc": "Measured value from the sensor, applicable to various types like temperature or humidity."
+    }
+  ]
+}
