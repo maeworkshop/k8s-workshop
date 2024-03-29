@@ -7,7 +7,10 @@
 
 rootProject.name = "kubernetes-workshop"
 include(
-        ":ecommerce-app:backend:order-service",
+//        ":ecommerce-app:service:product-catalog-service",
+//        ":ecommerce-app:service:order-checkout-service",
+
         ":ecommerce-app:backend:user-service",
-        ":ecommerce-app:ui:"
+
+//        ":ecommerce-app:ui:"
 )

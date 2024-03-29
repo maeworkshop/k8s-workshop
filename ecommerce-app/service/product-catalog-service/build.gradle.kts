@@ -1,15 +1,9 @@
-import net.researchgate.release.ReleaseExtension
-
 plugins {
     java
     idea
     id("org.springframework.boot") version "3.2.4"
     id("io.spring.dependency-management") version "1.1.4"
-    id("net.researchgate.release") version "3.0.2"
 }
-
-group = "com.maemresen.ecommerce"
-version = "0.0.1-SNAPSHOT"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -75,10 +69,3 @@ tasks {
     }
 }
 
-configure<ReleaseExtension> {
-    ignoredSnapshotDependencies.set(listOf("net.researchgate:gradle-release"))
-    with(git) {
-        requireBranch.set("feature/api-impl")
-        // to disable branch verification: requireBranch.set(null as String?)
-    }
-}
