@@ -27,7 +27,7 @@ dependencies {
     implementation("org.apache.avro:avro:$avroVersion")
     implementation("io.confluent:kafka-avro-serializer:$confluentVersion")
     implementation("io.confluent:kafka-schema-registry-client:$confluentVersion")
-    implementation(project(":lib:message-dto"))
+    implementation(project(":module:lib:message-dto"))
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
