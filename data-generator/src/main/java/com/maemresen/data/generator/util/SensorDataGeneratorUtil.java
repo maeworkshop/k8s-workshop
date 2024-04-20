@@ -1,11 +1,11 @@
 package com.maemresen.data.generator.util;
 
-import com.maemresen.data.generator.Device;
-import com.maemresen.data.generator.Sensor;
-import com.maemresen.data.generator.SensorData;
-import com.maemresen.data.generator.SensorType;
 import java.security.SecureRandom;
 import java.util.Random;
+import com.maemresen.lib.message.dto.Device;
+import com.maemresen.lib.message.dto.Sensor;
+import com.maemresen.lib.message.dto.SensorData;
+import com.maemresen.lib.message.dto.SensorType;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

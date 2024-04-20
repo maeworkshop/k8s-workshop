@@ -2,7 +2,6 @@ plugins {
     java
     id("org.springframework.boot") version "3.2.1"
     id("io.spring.dependency-management") version "1.1.4"
-    id("com.github.davidmc24.gradle.plugin.avro") version "1.3.0"
 }
 
 val avroVersion = "1.11.3"
@@ -28,6 +27,7 @@ dependencies {
     implementation("org.apache.avro:avro:$avroVersion")
     implementation("io.confluent:kafka-avro-serializer:$confluentVersion")
     implementation("io.confluent:kafka-schema-registry-client:$confluentVersion")
+    implementation(project(":app:lib:message-dto"))
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")

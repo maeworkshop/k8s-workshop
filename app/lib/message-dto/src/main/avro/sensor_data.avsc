@@ -1,5 +1,5 @@
 {
-  "namespace": "com.maemresen.data.generator",
+  "namespace": "com.maemresen.lib.message.dto",
   "type": "record",
   "name": "SensorData",
   "fields": [

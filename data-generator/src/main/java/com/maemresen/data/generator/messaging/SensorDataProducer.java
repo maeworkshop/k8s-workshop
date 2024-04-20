@@ -1,8 +1,8 @@
 package com.maemresen.data.generator.messaging;
 
-import com.maemresen.data.generator.SensorData;
 import com.maemresen.data.generator.config.props.MessagingProps;
 import com.maemresen.data.generator.util.Topic;
+import com.maemresen.lib.message.dto.SensorData;
 import org.springframework.cloud.function.cloudevent.CloudEventMessageBuilder;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Component;

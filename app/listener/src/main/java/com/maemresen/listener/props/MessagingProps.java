@@ -1,6 +1,6 @@
-package com.maemresen.data.generator.config.props;
+package com.maemresen.listener.props;
 
-import com.maemresen.data.generator.util.Topic;
+import com.maemresen.listener.util.Topic;
 import java.util.EnumMap;
 import java.util.Map;
 import lombok.AllArgsConstructor;

@@ -1,9 +1,9 @@
 package com.maemresen.data.generator.task;
 
-import com.maemresen.data.generator.SensorData;
 import com.maemresen.data.generator.config.props.SensorDataGeneratorProps;
 import com.maemresen.data.generator.messaging.SensorDataProducer;
 import com.maemresen.data.generator.util.SensorDataGeneratorUtil;
+import com.maemresen.lib.message.dto.SensorData;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;

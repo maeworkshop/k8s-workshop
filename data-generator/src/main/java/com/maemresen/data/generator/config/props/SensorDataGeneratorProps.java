@@ -1,7 +1,7 @@
 package com.maemresen.data.generator.config.props;
 
-import com.maemresen.data.generator.SensorType;
 import java.util.List;
+import com.maemresen.lib.message.dto.SensorType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

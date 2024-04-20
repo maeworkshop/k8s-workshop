@@ -7,5 +7,7 @@
 
 rootProject.name = "k8s-workshop"
 include(
-        ":data-generator"
+        ":app:lib:message-dto",
+        ":data-generator",
+        ":app:listener"
 )
