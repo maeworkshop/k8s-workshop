@@ -6,7 +6,6 @@ subprojects {
         val integrationTestTaskName = "integrationTest"
 
         group = "com.maemresen.ecommerce"
-        version = "0.01-SNAPSHOT"
 
         repositories {
             mavenCentral()
