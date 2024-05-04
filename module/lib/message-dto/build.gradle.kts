@@ -1,4 +1,5 @@
 plugins {
+    idea
     `java-library`
     id("com.github.davidmc24.gradle.plugin.avro") version "1.3.0"
 }
