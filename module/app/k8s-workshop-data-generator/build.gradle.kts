@@ -31,6 +31,9 @@ dependencies {
     implementation(project(":module:lib:k8s-workshop-avro-schemes"))
     implementation(project(":module:lib:k8s-workshop-messaging-spring-boot-starter"))
 
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.assertj:assertj-core")
+
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
     testCompileOnly("org.projectlombok:lombok:$lombokVersion")
