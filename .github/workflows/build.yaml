@@ -1,4 +1,4 @@
-name: Build DEV
+name: Build Branch
 
 on:
   push:
@@ -14,10 +14,12 @@ jobs:
       BUILD_NUMBER: ${{ steps.build-number.outputs.BUILD_NUMBER }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - id: build-number
         name: Configuring Build Number
         run: |
-          echo "BUILD_NUMBER=$(git rev-parse --short=8 HEAD)" >> $GITHUB_OUTPUT
+          echo "BUILD_NUMBER=$(git rev-parse --abbrev-ref HEAD | tr '/' '-')-$(git rev-parse --short=8 HEAD)" >> $GITHUB_OUTPUT
       - name: Get current branch name
         id: get_branch
         run: echo "CURRENT_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
@@ -60,10 +62,6 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
-      - id: build-number
-        name: Configuring Build Number
-        run: |
-          echo "BUILD_NUMBER=$(git rev-parse --short=8 HEAD)" >> $GITHUB_OUTPUT
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
@@ -75,4 +73,4 @@ jobs:
         with:
           context: module/app/k8s-workshop-data-generator
           push: true
-          tags: ghcr.io/maeworkshop/k8s-workshop-data-generator:${{ env.CURRENT_BRANCH_NAME }}-${{ needs.build-jar.outputs.BUILD_NUMBER }}
+          tags: ghcr.io/maeworkshop/k8s-workshop-data-generator:${{ needs.build-jar.outputs.BUILD_NUMBER }}
