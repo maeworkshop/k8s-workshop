@@ -60,6 +60,9 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
+      - name: Get current branch name
+        id: get_branch
+        run: echo "CURRENT_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
       - id: build-number
         name: Configuring Build Number
         run: |
