@@ -7,7 +7,8 @@
 
 rootProject.name = "k8s-workshop"
 include(
-        ":module:lib:message-dto",
-        ":module:app:data-generator",
-        ":module:app:listener"
+        ":module:lib:k8s-workshop-avro-schemes",
+        ":module:lib:k8s-workshop-messaging-spring-boot-starter",
+        ":module:app:k8s-workshop-data-generator",
+        ":module:app:k8s-workshop-listener"
 )

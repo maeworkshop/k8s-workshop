@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.maemresen.k8s.workshop.messaging.starter.MessagingAutoConfiguration
