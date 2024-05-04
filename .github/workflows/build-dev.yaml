@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+  workflow_dispatch:
 jobs:
   build-jar:
     runs-on: ubuntu-latest
@@ -46,10 +47,9 @@ jobs:
       - name: Uploading DataGenerator Jars
         uses: actions/upload-artifact@master
         with:
-          name: data-generator-jar
-          path: module/app/data-generator/build/libs
-
-  build-data-generator-image:
+          name: k8s-workshop-data-generator-jar
+          path: module/app/k8s-workshop-data-generator/build/libs
+  build-k8s-workshop-data-generator-image:
     needs:
       - build-jar
     name: Data Generator - Build & Push Docker Image
@@ -60,7 +60,10 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
-
+      - id: build-number
+        name: Configuring Build Number
+        run: |
+          echo "BUILD_NUMBER=$(git rev-parse --short=8 HEAD)" >> $GITHUB_OUTPUT
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
@@ -70,6 +73,6 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
-          context: module/app/data-generator
+          context: module/app/k8s-workshop-data-generator
           push: true
-          tags: ghcr.io/maeworkshop/data-generator:dev-${{ needs.build-jar.outputs.BUILD_NUMBER }}
+          tags: ghcr.io/maeworkshop/k8s-workshop-data-generator:${{ env.CURRENT_BRANCH_NAME }}-${{ needs.build-jar.outputs.BUILD_NUMBER }}
