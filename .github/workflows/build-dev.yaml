@@ -1,4 +1,4 @@
-name: Build
+name: Build DEV
 
 on:
   push:
@@ -61,4 +61,4 @@ jobs:
         with:
           context: module/app/data-generator
           push: true
-          tags: ghcr.io/maeworkshop/data-generator:${{ needs.build-jar.outputs.BUILD_NUMBER }}
+          tags: ghcr.io/maeworkshop/data-generator:dev-${{ needs.build-jar.outputs.BUILD_NUMBER }}

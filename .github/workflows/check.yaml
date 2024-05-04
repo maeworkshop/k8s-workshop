@@ -1,4 +1,4 @@
-name: Feature/Bugfix Check
+name: Check Branch
 
 on:
   push:
@@ -26,17 +26,3 @@ jobs:
         run: ./gradlew test
       - name: Integration Test
         run: ./gradlew integrationTest
-
-  dependency-submission:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-      - name: Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@v3.1.0
