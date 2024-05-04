@@ -5,7 +5,7 @@ on:
     branches:
       - feature/**
       - bugfix/**
-
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,7 +22,7 @@ jobs:
           distribution: 'temurin'
       - name: Get current branch name
         id: get_branch
-        run: echo "branch=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
+        run: echo "CURRENT_BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3.1.0
       - name: Build
@@ -35,7 +35,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          BRANCH_NAME: ${{ env.branch }}
+          BRANCH_NAME: ${{ env.CURRENT_BRANCH_NAME }}
         run: |
           echo "Branch name $BRANCH_NAME"
           CI=true ./gradlew sonar --info -Dsonar.branch.name=$BRANCH_NAME
