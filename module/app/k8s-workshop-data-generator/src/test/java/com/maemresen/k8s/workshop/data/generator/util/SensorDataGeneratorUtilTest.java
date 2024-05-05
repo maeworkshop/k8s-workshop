@@ -18,19 +18,11 @@ class SensorDataGeneratorUtilTest {
   private static final String DEVICE_NAME = "Device";
   private static final String SENSOR_NAME = "Sensor";
 
-  static class SensorTypeArgumentProvider implements ArgumentsProvider {
-
-    @Override
-    public Stream<? extends Arguments> provideArguments(ExtensionContext context) throws Exception {
-      return Arrays.stream(SensorType.values()).map(Arguments::of);
-    }
-  }
-
   @ParameterizedTest
   @ArgumentsSource(SensorTypeArgumentProvider.class)
   void generateRandomSensorData_shouldReturnNonNullSensorData(final SensorType sensorType) {
     final SensorData sensorData = SensorDataGeneratorUtil.generateRandomSensorData(LOCATION_NAME,
-        DEVICE_NAME, SENSOR_NAME, sensorType );
+        DEVICE_NAME, SENSOR_NAME, sensorType);
     assertThat(sensorData).isNotNull();
   }
 
@@ -39,7 +31,8 @@ class SensorDataGeneratorUtilTest {
   void generateRandomSensorData_shouldGenerateTemperatureWithinRange(final SensorType sensorType) {
     SensorData sensorData = SensorDataGeneratorUtil.generateRandomSensorData(LOCATION_NAME,
         DEVICE_NAME, SENSOR_NAME, sensorType);
-    assertThat(sensorData.getValue()).isBetween(SensorDataGeneratorUtil.TEMP_MIN_VALUE, SensorDataGeneratorUtil.TEMP_MAX_VALUE);
+    assertThat(sensorData.getValue()).isBetween(SensorDataGeneratorUtil.TEMP_MIN_VALUE,
+        SensorDataGeneratorUtil.TEMP_MAX_VALUE);
   }
 
   @ParameterizedTest
@@ -47,6 +40,15 @@ class SensorDataGeneratorUtilTest {
   void generateRandomSensorData_shouldGenerateHumidityWithinRange(final SensorType sensorType) {
     final SensorData sensorData = SensorDataGeneratorUtil.generateRandomSensorData(LOCATION_NAME,
         DEVICE_NAME, SENSOR_NAME, sensorType);
-    assertThat(sensorData.getValue()).isBetween(SensorDataGeneratorUtil.HUMIDITY_MIN_VALUE, SensorDataGeneratorUtil.HUMIDITY_MAX_VALUE);
+    assertThat(sensorData.getValue()).isBetween(SensorDataGeneratorUtil.HUMIDITY_MIN_VALUE,
+        SensorDataGeneratorUtil.HUMIDITY_MAX_VALUE);
+  }
+
+  static class SensorTypeArgumentProvider implements ArgumentsProvider {
+
+    @Override
+    public Stream<? extends Arguments> provideArguments(ExtensionContext context) throws Exception {
+      return Arrays.stream(SensorType.values()).map(Arguments::of);
+    }
   }
 }

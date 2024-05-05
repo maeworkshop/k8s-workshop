@@ -11,12 +11,11 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class SensorDataGeneratorUtil {
 
-  private static final Random random = new SecureRandom();
-
   public static final double TEMP_MIN_VALUE = 20.0;
   public static final double TEMP_MAX_VALUE = 35.0;
   public static final double HUMIDITY_MIN_VALUE = 30.0;
   public static final double HUMIDITY_MAX_VALUE = 100.0;
+  private static final Random random = new SecureRandom();
 
   public static SensorData generateRandomSensorData(
       final String locationName,

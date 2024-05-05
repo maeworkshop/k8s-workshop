@@ -15,15 +15,15 @@ public class MessagingProps {
 
   private EnumMap<Topic, TopicProps> topics;
 
+  public TopicProps getTopic(final Topic topic) {
+    return topics.getOrDefault(topic, null);
+  }
+
   public record TopicProps(
       String outputBindingName,
       String topicName,
       String partitionKey,
       Map<String, String> extra) {
 
-  }
-
-  public TopicProps getTopic(final Topic topic) {
-    return topics.getOrDefault(topic, null);
   }
 }

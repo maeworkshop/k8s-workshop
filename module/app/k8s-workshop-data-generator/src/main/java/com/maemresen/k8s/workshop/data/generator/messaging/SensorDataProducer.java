@@ -1,9 +1,9 @@
 package com.maemresen.k8s.workshop.data.generator.messaging;
 
-import com.maemresen.lib.message.dto.SensorData;
 import com.maemresen.k8s.workshop.messaging.starter.BaseMessageProducer;
 import com.maemresen.k8s.workshop.messaging.starter.MessagingProps;
 import com.maemresen.k8s.workshop.messaging.starter.Topic;
+import com.maemresen.lib.message.dto.SensorData;
 import org.springframework.cloud.function.cloudevent.CloudEventMessageBuilder;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Component;
