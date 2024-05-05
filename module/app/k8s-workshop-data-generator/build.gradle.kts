@@ -11,6 +11,13 @@ val confluentVersion = "7.6.1"
 val springCloudVersion = "2023.0.0"
 val lombokVersion = "1.18.30"
 
+val jacocoExclusions: Set<String> by project.extra {
+    setOf(
+        "**/config/**/*"
+    )
+}
+
+
 repositories {
     maven {
         setUrl("https://packages.confluent.io/maven/")
