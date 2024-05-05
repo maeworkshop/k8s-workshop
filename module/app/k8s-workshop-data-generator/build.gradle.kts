@@ -33,6 +33,7 @@ dependencies {
     implementation(project(":module:lib:k8s-workshop-messaging-spring-boot-starter"))
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.assertj:assertj-core")
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")
