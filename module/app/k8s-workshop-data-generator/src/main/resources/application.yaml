@@ -23,6 +23,13 @@ spring:
 
 app:
   generator:
+    constraint:
+      min-values:
+        TEMP: 20.0
+        HUMIDITY: 30.0
+      max-values:
+        TEMP: 35.0
+        HUMIDITY: 100.0
     sensor-data:
       locations:
         - name: location1
