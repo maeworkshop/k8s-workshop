@@ -11,12 +11,17 @@ val confluentVersion = "7.6.1"
 val springCloudVersion = "2023.0.0"
 val lombokVersion = "1.18.30"
 
-val jacocoExclusions: Set<String> by project.extra {
-    setOf(
-        "**/config/**/*"
-    )
+tasks {
+    withType<JacocoReport> {
+        afterEvaluate {
+            classDirectories.setFrom(files(classDirectories.files.map {
+                fileTree(it) {
+                    exclude(listOf("**/config/**/*"))
+                }
+            }))
+        }
+    }
 }
-
 
 repositories {
     maven {

@@ -9,6 +9,7 @@ sonar {
         property("sonar.projectKey", "maeworkshop_k8s-workshop")
         property("sonar.organization", "maeworkshop")
         property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.verbose", "true")
         property("sonar.coverage.jacoco.xmlReportPaths", "**/build/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
@@ -59,6 +60,7 @@ subprojects {
 
                 withType<Test> {
                     useJUnitPlatform()
+                    jvmArgs("-XX:+EnableDynamicAgentLoading")
                 }
 
                 named("check") {
@@ -94,15 +96,6 @@ subprojects {
                     withType<JacocoReport> {
                         reports {
                             xml.required = true
-                        }
-
-                        afterEvaluate {
-                            val jacocoExclusions: Set<String>? by project
-                            classDirectories.setFrom(files(classDirectories.files.map { dir ->
-                                fileTree(dir) {
-                                    jacocoExclusions?.let { exclude(it) }
-                                }
-                            }))
                         }
                     }
                 }
