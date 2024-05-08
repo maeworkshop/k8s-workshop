@@ -97,15 +97,6 @@ subprojects {
                         reports {
                             xml.required = true
                         }
-
-                        afterEvaluate {
-                            val jacocoExclusions: Set<String>? by project
-                            classDirectories.setFrom(files(classDirectories.files.map { dir ->
-                                fileTree(dir) {
-                                    jacocoExclusions?.let { exclude(it) }
-                                }
-                            }))
-                        }
                     }
                 }
             }
