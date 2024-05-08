@@ -11,6 +11,18 @@ val confluentVersion = "7.6.1"
 val springCloudVersion = "2023.0.0"
 val lombokVersion = "1.18.30"
 
+tasks {
+    withType<JacocoReport> {
+        afterEvaluate {
+            classDirectories.setFrom(files(classDirectories.files.map {
+                fileTree(it) {
+                    exclude(listOf("**/config/**/*"))
+                }
+            }))
+        }
+    }
+}
+
 repositories {
     maven {
         setUrl("https://packages.confluent.io/maven/")
@@ -33,6 +45,7 @@ dependencies {
     implementation(project(":module:lib:k8s-workshop-messaging-spring-boot-starter"))
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.assertj:assertj-core")
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")

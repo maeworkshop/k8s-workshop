@@ -42,7 +42,8 @@ public abstract class BaseControllerIT {
   }
 
   protected <T> MockHttpServletRequestBuilder withBody(final MockHttpServletRequestBuilder builder,
-      final T body) throws JsonProcessingException {
+                                                       final T body)
+      throws JsonProcessingException {
     return builder.contentType(MediaType.APPLICATION_JSON).content(toJson(body));
   }
 }

@@ -1,8 +1,8 @@
 package com.maemresen.k8s.workshop.data.generator.task;
 
-import com.maemresen.k8s.workshop.data.generator.config.props.SensorDataGeneratorProps;
+import com.maemresen.k8s.workshop.data.generator.config.props.GeneratorSensorDataProps;
 import com.maemresen.k8s.workshop.data.generator.messaging.SensorDataProducer;
-import com.maemresen.k8s.workshop.data.generator.util.SensorDataGeneratorUtil;
+import com.maemresen.k8s.workshop.data.generator.service.SensorDataGeneratorService;
 import com.maemresen.lib.message.dto.SensorData;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +14,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataGeneratorTask {
 
-  private final SensorDataGeneratorProps dataGeneratorProps;
+  private final GeneratorSensorDataProps dataGeneratorProps;
   private final SensorDataProducer sensorDataProducer;
+  private final SensorDataGeneratorService sensorDataGeneratorService;
 
   @Scheduled(cron = "0/2 * * * * ?")
   public void produceSensorData() {
@@ -23,7 +24,7 @@ public class DataGeneratorTask {
     dataGeneratorProps.getLocations().forEach(location -> location.devices().forEach(
         device -> device.sensors()
             .forEach(sensor -> {
-              final SensorData sensorData = SensorDataGeneratorUtil.generateRandomSensorData(
+              final SensorData sensorData = sensorDataGeneratorService.generateRandomSensorData(
                   location.name(),
                   device.name(),
                   sensor.name(),

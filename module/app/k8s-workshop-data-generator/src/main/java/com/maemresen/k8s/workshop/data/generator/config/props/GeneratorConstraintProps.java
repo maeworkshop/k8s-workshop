@@ -1,8 +1,9 @@
 package com.maemresen.k8s.workshop.data.generator.config.props;
 
-import java.util.List;
 import com.maemresen.lib.message.dto.SensorType;
+import java.util.Map;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,20 +14,10 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ConfigurationProperties(prefix = "app.generator.sensor-data")
+@Builder
+@ConfigurationProperties(prefix = "app.generator.constraint")
 @Configuration
-public class SensorDataGeneratorProps {
-
-  private List<LocationProps> locations;
-
-  public record LocationProps(String name, List<DeviceProps> devices) {
-  }
-
-  public record DeviceProps(String name, List<SensorProps> sensors) {
-
-  }
-
-  public record SensorProps(String name, SensorType type) {
-
-  }
+public class GeneratorConstraintProps {
+  private Map<SensorType, Double> minValues;
+  private Map<SensorType, Double> maxValues;
 }

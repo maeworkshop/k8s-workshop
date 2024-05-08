@@ -29,7 +29,7 @@ public abstract class BaseMessageProducer<T> {
   }
 
   protected CloudEventMessageBuilder<T> messageCustomizer(final T payload,
-      final CloudEventMessageBuilder<T> builder) {
+                                                          final CloudEventMessageBuilder<T> builder) {
     return builder;
   }
 }
