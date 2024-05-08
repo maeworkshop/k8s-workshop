@@ -1,0 +1,67 @@
+spring:
+  profiles:
+    active: dev
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+        bindings:
+          sensorDataProducer-out-0:
+            producer:
+              configuration:
+                value.serializer: ${app.messaging.serializer}
+                schema.registry.url: ${app.messaging.scheme-registry-url}
+
+      bindings:
+        sensorDataProducer-out-0:
+          destination: ${app.messaging.topics.SENSOR_DATA.topic-name}
+          producer:
+            partition-key-expression: headers['${app.messaging.topics.SENSOR_DATA.partition-key}']
+            partition-count: 3
+            use-native-encoding: true
+
+app:
+  generator:
+    constraint:
+      min-values:
+        TEMP: 20.0
+        HUMIDITY: 30.0
+      max-values:
+        TEMP: 35.0
+        HUMIDITY: 100.0
+    sensor-data:
+      locations:
+        - name: location1
+          devices:
+            - name: device1-1
+              sensors:
+                - name: sensor1-1-1
+                  type: HUMIDITY
+                - name: sensor1-1-2
+                  type: TEMP
+        - name: location2
+          devices:
+            - name: device2
+              sensors:
+                - name: sensor2-2-1
+                  type: HUMIDITY
+                - name: sensor2-2-2
+                  type: TEMP
+        - name: location3
+          devices:
+            - name: device3-1
+              sensors:
+                - name: sensor3-1-1
+                  type: HUMIDITY
+                - name: sensor3-1-2
+                  type: TEMP
+
+  messaging:
+    serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    scheme-registry-url: http://localhost:8081
+    topics:
+      SENSOR_DATA:
+        output-binding-name: sensorDataProducer-out-0
+        topic-name: sensor-data
+        partition-key: partitionKey

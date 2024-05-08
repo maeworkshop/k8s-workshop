@@ -1,16 +1,16 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Listener" type="GradleRunConfiguration" factoryName="Gradle" folderName="02-app">
+  <configuration default="false" name="Sonar Scan" type="GradleRunConfiguration" factoryName="Gradle" folderName="00-build">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="" />
+      <option name="scriptParameters" value="-Dsonar.branch.name=local" />
       <option name="taskDescriptions">
         <list />
       </option>
       <option name="taskNames">
         <list>
-          <option value=":module:app:k8s-workshop-listener:bootRun" />
+          <option value="sonar" />
         </list>
       </option>
       <option name="vmOptions" />
