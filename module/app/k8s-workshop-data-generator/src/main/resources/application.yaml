@@ -3,13 +3,6 @@ spring:
     active: dev
   kafka:
     bootstrap-servers: localhost:9092
-    consumer:
-      group-id: group_id
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-      properties:
-        schema.registry.url: http://localhost:8081
-        specific.avro.reader: true
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
@@ -36,7 +29,7 @@ app:
                   type: TEMP
         - name: location2
           devices:
-            - name: device2
+            - name: device2-1
               sensors:
                 - name: sensor2-2-1
                   type: HUMIDITY
@@ -52,8 +45,6 @@ app:
                   type: TEMP
 
   messaging:
-#    serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-#    scheme-registry-url: http://localhost:8081
     topics:
       SENSOR_DATA:
         name: sensor-data

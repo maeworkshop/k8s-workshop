@@ -1,13 +1,11 @@
 package com.maemresen.k8s.workshop.listener;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.ComponentScan;
 
-@Slf4j
-@RequiredArgsConstructor
+@ComponentScan("com.maemresen")
 @SpringBootApplication
 public class ListenerApp {
 
