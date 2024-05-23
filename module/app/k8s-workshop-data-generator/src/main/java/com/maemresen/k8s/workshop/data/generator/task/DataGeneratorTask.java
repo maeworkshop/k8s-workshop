@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 public class DataGeneratorTask {
 
   private final GeneratorSensorDataProps dataGeneratorProps;
-  private final SensorDataProducer sensorDataProducer;
   private final SensorDataGeneratorService sensorDataGeneratorService;
+    private final SensorDataProducer sensorDataProducer;
 
   @Scheduled(cron = "0/2 * * * * ?")
   public void produceSensorData() {
@@ -29,7 +29,7 @@ public class DataGeneratorTask {
                   device.name(),
                   sensor.name(),
                   sensor.type());
-              sensorDataProducer.publish(sensorData);
+                sensorDataProducer.sendMessage(device.name(), sensorData);
             })));
   }
 

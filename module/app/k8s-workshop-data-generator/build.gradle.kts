@@ -9,7 +9,9 @@ plugins {
 val avroVersion = "1.11.3"
 val confluentVersion = "7.6.1"
 val springCloudVersion = "2023.0.0"
-val lombokVersion = "1.18.30"
+val lombokVersion = "1.18.32"
+val testcontainersVersion = "1.19.8"
+val commonsCodecVersion = "1.17.0"
 
 tasks {
     withType<JacocoReport> {
@@ -37,7 +39,6 @@ dependencyManagement {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka")
     implementation("org.apache.avro:avro:$avroVersion")
     implementation("io.confluent:kafka-avro-serializer:$confluentVersion")
     implementation("io.confluent:kafka-schema-registry-client:$confluentVersion")
@@ -47,6 +48,13 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.assertj:assertj-core")
+
+    integrationTestImplementation("org.springframework.boot:spring-boot-testcontainers")
+    integrationTestImplementation("org.testcontainers:testcontainers-bom:$testcontainersVersion")
+    integrationTestImplementation("org.testcontainers:testcontainers")
+    integrationTestImplementation("org.testcontainers:junit-jupiter")
+    integrationTestImplementation("org.testcontainers:kafka")
+    integrationTestImplementation("commons-codec:commons-codec:$commonsCodecVersion")
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")

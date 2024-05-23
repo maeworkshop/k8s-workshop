@@ -20,8 +20,7 @@ public class MessagingProps {
   }
 
   public record TopicProps(
-      String outputBindingName,
-      String topicName,
+      String name,
       String partitionKey,
       Map<String, String> extra) {
 

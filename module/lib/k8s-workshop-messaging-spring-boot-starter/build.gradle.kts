@@ -24,10 +24,10 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka")
-    implementation("io.confluent:kafka-avro-serializer:$confluentVersion")
-    implementation("io.confluent:kafka-schema-registry-client:$confluentVersion")
+    api("org.springframework.boot:spring-boot-starter")
+    api("org.springframework.kafka:spring-kafka")
+    api("io.confluent:kafka-avro-serializer:$confluentVersion")
+    api("io.confluent:kafka-schema-registry-client:$confluentVersion")
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
