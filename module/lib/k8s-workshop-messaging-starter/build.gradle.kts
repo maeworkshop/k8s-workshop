@@ -28,6 +28,7 @@ dependencies {
     api("org.springframework.kafka:spring-kafka")
     api("io.confluent:kafka-avro-serializer:$confluentVersion")
     api("io.confluent:kafka-schema-registry-client:$confluentVersion")
+    api(project(":module:lib:k8s-workshop-avro-schemes"))
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")

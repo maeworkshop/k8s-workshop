@@ -42,8 +42,7 @@ dependencies {
     implementation("org.apache.avro:avro:$avroVersion")
     implementation("io.confluent:kafka-avro-serializer:$confluentVersion")
     implementation("io.confluent:kafka-schema-registry-client:$confluentVersion")
-    implementation(project(":module:lib:k8s-workshop-avro-schemes"))
-    implementation(project(":module:lib:k8s-workshop-messaging-spring-boot-starter"))
+    implementation(project(":module:lib:k8s-workshop-messaging-starter"))
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.junit.jupiter:junit-jupiter-params")

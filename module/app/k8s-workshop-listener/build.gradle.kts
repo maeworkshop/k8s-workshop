@@ -26,9 +26,7 @@ dependencyManagement {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.apache.avro:avro:$avroVersion")
-    implementation(project(":module:lib:k8s-workshop-avro-schemes"))
-    implementation(project(":module:lib:k8s-workshop-messaging-spring-boot-starter"))
-
+    implementation(project(":module:lib:k8s-workshop-messaging-starter"))
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
