@@ -26,43 +26,43 @@ subprojects {
 
         tasks {
             register<Test>("integrationTest") {
-                    description = "Runs the integration tests."
-                    group = "verification"
-                    mustRunAfter("test")
+                description = "Runs the integration tests."
+                group = "verification"
+                mustRunAfter("test")
                 useJUnitPlatform {
                     includeTags("itest")
                 }
                 jvmArgs("-XX:+EnableDynamicAgentLoading")
-                }
-
-                withType<Test> {
-                    useJUnitPlatform {
-                        excludeTags("itest")
-                    }
-                    jvmArgs("-XX:+EnableDynamicAgentLoading")
-                }
-
-                named("check") {
-                    dependsOn("integrationTest")
-                }
             }
 
-            pluginManager.withPlugin("jacoco") {
-                tasks {
-                    named("test") {
-                        finalizedBy(named("jacocoTestReport"))
-                    }
+            withType<Test> {
+                useJUnitPlatform {
+                    excludeTags("itest")
+                }
+                jvmArgs("-XX:+EnableDynamicAgentLoading")
+            }
 
-                    named("jacocoTestReport") {
-                        dependsOn("test")
-                    }
+            named("check") {
+                dependsOn("integrationTest")
+            }
+        }
 
-                    withType<JacocoReport> {
-                        reports {
-                            xml.required = true
-                        }
+        pluginManager.withPlugin("jacoco") {
+            tasks {
+                named("test") {
+                    finalizedBy(named("jacocoTestReport"))
+                }
+
+                named("jacocoTestReport") {
+                    dependsOn("test")
+                }
+
+                withType<JacocoReport> {
+                    reports {
+                        xml.required = true
                     }
                 }
             }
+        }
     }
 }
