@@ -1,5 +1,3 @@
-import org.gradle.plugins.ide.idea.model.IdeaModel
-
 plugins {
     id("org.sonarqube") version "4.4.1.3373"
 }
@@ -16,9 +14,6 @@ sonar {
 
 subprojects {
     pluginManager.withPlugin("java") {
-        val integrationTestSrcPath = "src/integrationTest"
-        val integrationTestTaskName = "integrationTest"
-
         group = "com.maemresen.ecommerce"
 
         repositories {
@@ -29,42 +24,26 @@ subprojects {
             sourceCompatibility = JavaVersion.VERSION_21
         }
 
-        extensions.configure<SourceSetContainer> {
-            val mainOutput = getByName("main").output
-            val testOutput = getByName("test").output
-            val integrationTest by creating {
-                compileClasspath += mainOutput + testOutput
-                runtimeClasspath += mainOutput + testOutput
-                java.srcDir("$integrationTestSrcPath/java")
-                resources.srcDir("$integrationTestSrcPath/resources")
-            }
-
-            configurations {
-                getByName("integrationTestImplementation") {
-                    extendsFrom(getByName("testImplementation"))
-                }
-
-                getByName("integrationTestRuntimeOnly") {
-                    extendsFrom(getByName("testRuntimeOnly"))
-                }
-            }
-
-            tasks {
-                register<Test>(integrationTestTaskName) {
+        tasks {
+            register<Test>("integrationTest") {
                     description = "Runs the integration tests."
                     group = "verification"
-                    testClassesDirs = integrationTest.output.classesDirs
-                    classpath = integrationTest.runtimeClasspath
                     mustRunAfter("test")
+                useJUnitPlatform {
+                    includeTags("itest")
+                }
+                jvmArgs("-XX:+EnableDynamicAgentLoading")
                 }
 
                 withType<Test> {
-                    useJUnitPlatform()
+                    useJUnitPlatform {
+                        excludeTags("itest")
+                    }
                     jvmArgs("-XX:+EnableDynamicAgentLoading")
                 }
 
                 named("check") {
-                    dependsOn(integrationTestTaskName)
+                    dependsOn("integrationTest")
                 }
             }
 
@@ -73,21 +52,6 @@ subprojects {
                     named("test") {
                         finalizedBy(named("jacocoTestReport"))
                     }
-
-                    named("jacocoTestReport") {
-                        dependsOn("test")
-                    }
-                }
-
-
-            }
-
-            pluginManager.withPlugin("jacoco") {
-                tasks {
-                    named("test") {
-                        finalizedBy(named("jacocoTestReport"))
-                    }
-
 
                     named("jacocoTestReport") {
                         dependsOn("test")
@@ -100,14 +64,5 @@ subprojects {
                     }
                 }
             }
-
-            pluginManager.withPlugin("idea") {
-                extensions.configure<IdeaModel> {
-                    module {
-                        testSources.from(integrationTest.java.srcDirs)
-                    }
-                }
-            }
-        }
     }
 }

@@ -12,6 +12,7 @@ val springCloudVersion = "2023.0.0"
 val lombokVersion = "1.18.32"
 val testcontainersVersion = "1.19.8"
 val commonsCodecVersion = "1.17.0"
+val awaitilityVersion = "4.2.1"
 
 tasks {
     withType<JacocoReport> {
@@ -47,13 +48,13 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.assertj:assertj-core")
-
-    integrationTestImplementation("org.springframework.boot:spring-boot-testcontainers")
-    integrationTestImplementation("org.testcontainers:testcontainers-bom:$testcontainersVersion")
-    integrationTestImplementation("org.testcontainers:testcontainers")
-    integrationTestImplementation("org.testcontainers:junit-jupiter")
-    integrationTestImplementation("org.testcontainers:kafka")
-    integrationTestImplementation("commons-codec:commons-codec:$commonsCodecVersion")
+    testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    testImplementation("org.testcontainers:testcontainers-bom:$testcontainersVersion")
+    testImplementation("org.testcontainers:testcontainers")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:kafka")
+    testImplementation("commons-codec:commons-codec:$commonsCodecVersion")
+    testImplementation("org.awaitility:awaitility:$awaitilityVersion")
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")

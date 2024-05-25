@@ -1,4 +1,4 @@
-package com.maemresen.k8s.workshop.data.generator;
+package com.maemresen.k8s.workshop.data.generator.itest;
 
 import org.springframework.boot.test.context.TestConfiguration;
 
