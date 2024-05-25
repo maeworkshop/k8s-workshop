@@ -7,8 +7,8 @@
 
 rootProject.name = "k8s-workshop"
 include(
-        ":module:lib:k8s-workshop-avro-schemes",
-        ":module:lib:k8s-workshop-messaging-starter",
-        ":module:app:k8s-workshop-data-generator",
-        ":module:app:k8s-workshop-listener"
+        ":module:lib:avro-schemes",
+        ":module:lib:messaging-starter",
+        ":module:app:data-generator",
+        ":module:app:listener"
 )

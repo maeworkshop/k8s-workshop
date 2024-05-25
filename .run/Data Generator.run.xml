@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value=":module:app:k8s-workshop-data-generator:bootRun" />
+          <option value=":module:app:data-generator:bootRun" />
         </list>
       </option>
       <option name="vmOptions" />
