@@ -48,4 +48,3 @@ app:
     topics:
       SENSOR_DATA:
         name: sensor-data
-        partition-key: partitionKey
